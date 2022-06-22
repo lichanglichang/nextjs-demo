@@ -114,3 +114,11 @@
     flex-direction: column;
   }
 }
+.blogItem:hover {
+  color: orangered;
+}
+.blogItem {
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 10px;
+}
