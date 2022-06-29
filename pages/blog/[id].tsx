@@ -38,8 +38,13 @@ const BlogDetail = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then(() => {
-        queryComment();
+      .then((res) => {
+        if(res.code){
+          queryComment();
+        }else{
+          alert(res.message)
+        }
+       
       });
   };
 

@@ -1,15 +1,21 @@
 import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
+
+type Data={
+  code:number
+  message:string
+}
+
 const handler = (req: NextApiRequest,
-  res: NextApiResponse) => {
+  res: NextApiResponse<Data>) => {
   // 判断请求方式
   if (req.method === "POST") {
     // 获取参数
     const { username, text, blogId } = req.body;
     // 验证
     if (!username || username.trim() === "" || !text || text.trim() === "") {
-      res.status(422).json({ massage: "无效输入" });
+      res.status(422).json({ code:0,message: "无效输入" });
       return;
     }
 
@@ -32,7 +38,8 @@ const handler = (req: NextApiRequest,
     fs.writeFileSync(filePath, JSON.stringify(data));
     
     res.status(201).json({
-      msg: "添加成功"
+      code:1,
+      message: "添加成功"
     });
   }
 };
