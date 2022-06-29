@@ -4,3 +4,22 @@
     font-size: 18px;
     cursor: pointer;
 }
+
+.title{
+    border: 2px solid black;
+    width: 30vw;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+.title:hover{
+    border: 2px solid orangered;
+    color:orangered
+}
+.wrap{
+    padding: 24px;
+}
+.textInput{
+    margin: 24px 0;
+}
