@@ -2,20 +2,32 @@ import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
 
-type Data={
-  code:number
-  message:string
-}
+type Data = {
+  code: number;
+  message: string;
+};
 
-const handler = (req: NextApiRequest,
-  res: NextApiResponse<Data>) => {
+// 1.req
+// req.method 请求方式
+// req.body (经过处理的解析成字符串)
+// req.query 请求参数
+// req.cookies cookie
+
+// 2.res
+// res.statusCode-设置状态码
+// res.setHeader-设置响应头
+// res.end()-发送数据nextjs包装的：
+// res.status(code)-设置状态码的功能。code必须是有效的HTTP状态代码res.json(json)-发送JSON响应。json必须是有效的JSON对象
+// res.send(body)-发送HTTP响应。body可以是string，object或Buffer
+
+const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   // 判断请求方式
   if (req.method === "POST") {
     // 获取参数
     const { username, text, blogId } = req.body;
     // 验证
     if (!username || username.trim() === "" || !text || text.trim() === "") {
-      res.status(422).json({ code:0,message: "无效输入" });
+      res.status(422).json({ code: 0, message: "无效输入" });
       return;
     }
 
@@ -36,10 +48,10 @@ const handler = (req: NextApiRequest,
 
     // 重写文件数据
     fs.writeFileSync(filePath, JSON.stringify(data));
-    
+
     res.status(201).json({
-      code:1,
-      message: "添加成功"
+      code: 1,
+      message: "添加成功",
     });
   }
 };

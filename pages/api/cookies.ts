@@ -1,12 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "../../utils/cookies";
+const connect = require("connect");
+const app = connect();
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => {
-  // Calling our pure function using the `res` object, it will add the `set-cookie` header
+app.use((req: NextApiRequest, res: NextApiResponse, next: any) => {
   setCookie(res, "Next.js", "api-middleware!");
-  // req.cookies();
-  // Return the `set-cookie` header so we can display it in the browser and show that it works!
-  res.end(res.getHeader("Set-Cookie"));
-};
+  next();
+});
 
-export default handler;
+app.use((req: NextApiRequest, res: NextApiResponse, next: any) => {
+  setCookie(res, "name", "liChang");
+  res.end(res.getHeader("Set-Cookie"));
+});
+
+export default app;
