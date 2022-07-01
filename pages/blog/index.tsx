@@ -6,6 +6,7 @@ const fetcher = (url: any) => fetch(url).then((res) => res.text());
 const Blog = () => {
   const data = [1, 2, 3, 4, 5];
   const router = useRouter();
+
   const { data: cookiesData, error } = useSWR("/api/cookies", fetcher);
   console.log(cookiesData);
 
