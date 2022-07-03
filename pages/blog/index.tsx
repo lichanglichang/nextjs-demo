@@ -8,7 +8,6 @@ const Blog = () => {
   const router = useRouter();
 
   const { data: cookiesData, error } = useSWR("/api/cookies", fetcher);
-  console.log(cookiesData);
 
   return (
     <div style={{ padding: "20px" }}>
@@ -29,6 +28,7 @@ const Blog = () => {
           博客{item}
         </p>
       ))}
+      <p>cookies值：{cookiesData}</p>
     </div>
   );
 };

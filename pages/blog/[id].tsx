@@ -4,10 +4,10 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "../../styles/blog.module.css";
 
 interface commentType {
-  id:string
-  username:string
-  text:string
-  blogId:string
+  id: string;
+  username: string;
+  text: string;
+  blogId: string;
 }
 
 const BlogDetail = () => {
@@ -39,12 +39,23 @@ const BlogDetail = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        if(res.code){
+        if (res.code) {
           queryComment();
-        }else{
-          alert(res.message)
+        } else {
+          alert(res.message);
         }
-       
+      });
+  };
+
+  // 删除评论
+  const handleDelete = (id: string) => {
+    fetch(`/api/comments/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        queryComment();
+        alert(res.message);
       });
   };
 
@@ -75,6 +86,7 @@ const BlogDetail = () => {
           onChange={(e) => {
             setName(e.target.value);
           }}
+          className={styles.input}
         />
       </div>
 
@@ -82,9 +94,11 @@ const BlogDetail = () => {
         评论：
         <textarea
           value={text}
+          rows={4}
           onChange={(e) => {
             setText(e.target.value);
           }}
+          className={styles.textarea}
         />
       </div>
 
@@ -92,6 +106,7 @@ const BlogDetail = () => {
         onClick={() => {
           handleSubmit();
         }}
+        className={styles.button}
       >
         发表评论
       </button>
@@ -99,8 +114,17 @@ const BlogDetail = () => {
       {comments.map((item: commentType, index: number) => {
         return (
           <div key={index}>
-            <p>{item.username}</p>
-            <p>评论内容：{item.text}</p>
+            <h3>评论 {index + 1}</h3>
+            <span className={styles.span}>by:{item.username}</span>
+            <span className={styles.span}>评论内容：{item.text}</span>
+            <button
+              className={styles.button}
+              onClick={() => {
+                handleDelete(item.id);
+              }}
+            >
+              删除
+            </button>
             <hr></hr>
           </div>
         );
