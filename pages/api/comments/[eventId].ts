@@ -11,7 +11,7 @@ function handler( req: NextApiRequest,
     // 过滤数据
     const CommentsData = JSON.parse(fs.readFileSync(filePath) as unknown as string).filter(
       (item:any) => {
-        return item.blogId === eventId;
+        return item.slug === eventId;
       }
     );
     res.status(200).json({ CommentsData: CommentsData });

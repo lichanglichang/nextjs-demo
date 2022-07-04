@@ -2,9 +2,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../../styles/blog.module.css";
 import useSWR from "swr";
+import { getAllPosts } from "../../utils/api";
 const fetcher = (url: any) => fetch(url).then((res) => res.text());
-const Blog = () => {
-  const data = [1, 2, 3, 4, 5];
+const Blog = ({ allPosts }: any) => {
   const router = useRouter();
 
   const { data: cookiesData, error } = useSWR("/api/cookies", fetcher);
@@ -17,15 +17,18 @@ const Blog = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2>技术博客</h2>
-      {data.map((item) => (
+      {allPosts.map((item: any, index: number) => (
         <p
-          key={item}
+          key={index}
           onClick={() => {
-            router.push(`/blog/${item}`);
+            router.push(`/blog/${item.slug}`);
           }}
           className={styles.title}
         >
-          博客{item}
+          <h3>标题：{item.title}</h3>
+          <p> 作者：{item.author.name}</p>
+          <p> 时间：{item.date}</p>
+          <p> 介绍：{item.excerpt}</p>
         </p>
       ))}
       <p>cookies值：{cookiesData}</p>
@@ -33,3 +36,18 @@ const Blog = () => {
   );
 };
 export default Blog;
+
+export async function getStaticProps() {
+  const allPosts = getAllPosts([
+    "title",
+    "date",
+    "slug",
+    "author",
+    "coverImage",
+    "excerpt",
+  ]);
+
+  return {
+    props: { allPosts },
+  };
+}

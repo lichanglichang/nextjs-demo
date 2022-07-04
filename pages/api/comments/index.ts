@@ -24,7 +24,8 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   // 判断请求方式
   if (req.method === "POST") {
     // 获取参数
-    const { username, text, blogId } = req.body;
+    const { username, text, slug } = req.body;
+    
     // 验证
     if (!username || username.trim() === "" || !text || text.trim() === "") {
       res.status(422).json({ code: 0, message: "无效输入" });
@@ -36,7 +37,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
       id: new Date().toISOString(),
       username,
       text,
-      blogId,
+      slug,
     };
 
     // 获取文件路径
