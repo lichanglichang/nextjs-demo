@@ -18,7 +18,7 @@ const Blog = ({ allPosts }: any) => {
       </Head>
       <h2>技术博客</h2>
       {allPosts.map((item: any, index: number) => (
-        <p
+        <div
           key={index}
           onClick={() => {
             router.push(`/blog/${item.slug}`);
@@ -29,7 +29,7 @@ const Blog = ({ allPosts }: any) => {
           <p> 作者：{item.author.name}</p>
           <p> 时间：{item.date}</p>
           <p> 介绍：{item.excerpt}</p>
-        </p>
+        </div>
       ))}
       <p>cookies值：{cookiesData}</p>
     </div>

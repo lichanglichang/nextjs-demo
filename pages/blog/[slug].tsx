@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import styles from "../../styles/blog.module.css";
 import { getAllPosts, getPostBySlug } from "../../utils/api";
-import markdownToHtml from "../../utils/markdownToHtml"
+import markdownToHtml from "../../utils/markdownToHtml";
 interface commentType {
   id: string;
   username: string;
@@ -11,7 +11,7 @@ interface commentType {
   blogId: string;
 }
 
-const BlogDetail = ({post}:any) => {
+const BlogDetail = ({ post }: any) => {
   const { slug } = useRouter().query;
   const router = useRouter();
   const [name, setName] = useState("");
@@ -79,16 +79,16 @@ const BlogDetail = ({post}:any) => {
         </span>
         <span
           onClick={() => {
-            router.push(`/blog/${post.slug}/?counter=10`, undefined, { shallow: true });
+            router.push(`/blog/${post.slug}/?counter=10`, undefined, {
+              shallow: true,
+            });
           }}
           className={styles.back}
         >
           浅层路由跳转
         </span>
       </h2>
-      <div
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <div dangerouslySetInnerHTML={{ __html: post.content }} />
       <div className={styles.textInput}>
         姓名：
         <input
@@ -146,19 +146,18 @@ const BlogDetail = ({post}:any) => {
 export default BlogDetail;
 
 // 静态生成
-export async function getStaticProps({ params }:any) {
-  const post:any = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-  ])
-  const content = await markdownToHtml(post.content || '')
-  console.log("这里执行了吗？");
-  
+export async function getStaticProps({ params }: any) {
+  const post: any = getPostBySlug(params.slug, [
+    "title",
+    "date",
+    "slug",
+    "author",
+    "content",
+    "ogImage",
+    "coverImage",
+  ]);
+  const content = await markdownToHtml(post.content || "");
+
   return {
     props: {
       post: {
@@ -166,21 +165,21 @@ export async function getStaticProps({ params }:any) {
         content,
       },
     },
-  }
+  };
 }
 
 // 页面路径取决于外部数据
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = getAllPosts(["slug"]);
 
   return {
-    paths: posts.map((post:any) => {
+    paths: posts.map((post: any) => {
       return {
         params: {
           slug: post.slug,
         },
-      }
+      };
     }),
     fallback: false,
-  }
+  };
 }
