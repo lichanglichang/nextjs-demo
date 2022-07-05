@@ -1,13 +1,13 @@
 ---
-title: 'typeScript 学习'
-excerpt: '学习hooks的运用,练习demo'
-coverImage: '/assets/blog/hello-world/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+title: "typeScript 学习"
+excerpt: "typeScript语法"
+coverImage: "/assets/blog/hello-world/cover.jpg"
+date: "2020-03-16T05:35:07.322Z"
 author:
-  name: 小明
-  picture: '/assets/blog/authors/tim.jpeg'
+  name: 赵四
+  picture: "/assets/blog/authors/tim.jpeg"
 ogImage:
-  url: '/assets/blog/hello-world/cover.jpg'
+  url: "/assets/blog/hello-world/cover.jpg"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.

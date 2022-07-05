@@ -25,7 +25,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "POST") {
     // 获取参数
     const { username, text, slug } = req.body;
-    
+
     // 验证
     if (!username || username.trim() === "" || !text || text.trim() === "") {
       res.status(422).json({ code: 0, message: "无效输入" });
@@ -42,6 +42,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     // 获取文件路径
     const filePath = path.join(process.cwd(), "data", "comments.json");
+
     // 读取文件数据
     const fileData = fs.readFileSync(filePath);
     const data = JSON.parse(fileData as unknown as string);
