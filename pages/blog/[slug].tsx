@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import styles from "../../styles/blog.module.css";
@@ -86,6 +87,11 @@ const BlogDetail = ({ post }: any) => {
           className={styles.back}
         >
           浅层路由跳转
+        </span>
+        <span className={styles.back}>
+          <Link as="/detail" href={`/blog/detail`}>
+            重命名路径
+          </Link>
         </span>
       </h2>
       <div dangerouslySetInnerHTML={{ __html: post.content }} />

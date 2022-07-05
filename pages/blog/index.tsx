@@ -7,7 +7,7 @@ const fetcher = (url: any) => fetch(url).then((res) => res.text());
 const Blog = ({ allPosts }: any) => {
   const router = useRouter();
 
-  const { data: cookiesData, error } = useSWR("/api/cookies", fetcher);
+  const { data: cookiesData, error } = useSWR("/api/middleware", fetcher);
 
   return (
     <div style={{ padding: "20px" }}>
