@@ -5,6 +5,7 @@ const RequestTransmit = async (req: NextApiRequest, res: NextApiResponse) => {
     res.end("internet Error");
     return;
   }
+
   let response = await fetch("http://localhost:3002/api/detail", {
     method: "POST",
     body: JSON.stringify(req.body),
