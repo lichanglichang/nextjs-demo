@@ -26,7 +26,7 @@ app.use((req: NextApiRequest, res: NextApiResponse, next: any) => {
 });
 
 app.use((req: NextApiRequest, res: NextApiResponse, next: any) => {
-  setCookie(res, "Next.js", "api-middleware!");
+  setCookie(res, "name", "liChang");
   res.end(res.getHeader("Set-Cookie"));
 });
 
